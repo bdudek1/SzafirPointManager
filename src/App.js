@@ -1,6 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 
+import { DBConfig } from './DBConfig';
+import { initDB, IndexedDB, AccessDB } from 'react-indexed-db';
+ 
+initDB(DBConfig);
+
 function App() {
   return (
     <div className="App">
