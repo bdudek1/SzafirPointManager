@@ -5,15 +5,15 @@ const isDev = require('electron-is-dev');
 
 function createWindow () {
     const win = new BrowserWindow({
-      width: 800,
+      width: 1000,
       height: 600,
       title: 'SzafirPoint Menedżer',
       webPreferences: {
         nodeIntegration: true,
       },
+      icon: __dirname + '/favicon.ico'
     })
   
-    //win.loadFile('./public/index.html')
     win.loadURL(
         isDev
           ? 'http://localhost:3000'
@@ -24,7 +24,6 @@ function createWindow () {
         win.webContents.openDevTools({ mode: 'detach' });
     }
   }
-
 
   app.whenReady().then(() => {
     createWindow()

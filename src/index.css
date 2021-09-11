@@ -5,9 +5,51 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  align-content: center;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  color:#3c7ee8;
+  padding: 13px;
+  border-radius: 12px;
+  align-self: center;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+* {
+  font-family: cursive;
+}
+
+.drawer-link {
+  min-width: 200px;
+  border-radius: 5px;
+  align-self: center;
+  color:#3c7ee8;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 3px;
+}
+
+.drawer-link:hover {
+  color:#0b48a8;
+  cursor: pointer;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition-duration: 0.3s;
+}
+
+.appBar {
+  background-color: #3c7ee8;
+}
+

@@ -1,29 +1,39 @@
-import logo from './logo.svg';
+import React, {useState} from 'react'
+import {Route, Switch, HashRouter} from "react-router-dom";
+
 import './App.css';
 
-import { DBConfig } from './DBConfig';
-import { initDB, IndexedDB, AccessDB } from 'react-indexed-db';
- 
-initDB(DBConfig);
+import HomePage from './containers/HomePage/HomePage';
+import OffersPage from './containers/OffersPage/OffersPage';
+import LittersPage from './containers/LittersPage/LittersPage'
+import CatsPage from './containers/CatsPage/CatsPage'
+import Layout from './containers/Layout/Layout';
+
+import SearchContext from './SearchContext';
 
 function App() {
+  const [searchString, setSearchString] = useState('SearchString');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SearchContext.Provider value ={[searchString, setSearchString]}>
+      <React.Fragment>
+
+          <HashRouter>
+
+          <Layout />
+
+            <Switch>
+              <Route path="/" component={HomePage} exact/>
+              <Route path="/offers" component={OffersPage} exact/>
+              <Route path="/litters" component={LittersPage} exact/>
+              <Route path="/cats" component={CatsPage} exact/>
+            </Switch>
+
+          </HashRouter>
+
+      </React.Fragment>
+    </SearchContext.Provider>
+
   );
 }
 
