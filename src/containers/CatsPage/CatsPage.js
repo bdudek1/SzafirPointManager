@@ -4,12 +4,14 @@ import SearchContext from '../../SearchContext'
 
 import CatDTOBuilder from '../../data/dto/CatDTOBuilder'
 import DexieCatsRepository from '../../data/repositories/DexieCatsRepository'
+import CatServiceImpl from '../../services/CatServiceImpl'
 
 const CatsPage = () => {
     const [searchString, setSearchString] = useContext(SearchContext)
-    const [catsRepo] = useState(new DexieCatsRepository())
+    const [catService] = useState(new CatServiceImpl(new DexieCatsRepository()))
 
     useEffect(() => {
+        setSearchString('')
         // const cat = new CatDTOBuilder()
         //                                .setName("name")
         //                                .setSex("sex")
@@ -21,7 +23,7 @@ const CatsPage = () => {
 
         //catsRepo.deleteByName("name")
 
-        catsRepo.getByName("name").then(result => {
+        catService.getAllCats().then(result => {
             console.log(result)
         })
         //console.log(catsRepo.getByName("name"))

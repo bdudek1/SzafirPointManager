@@ -16,6 +16,10 @@ class DexieCatsRepository extends CatsRepository {
                                 .first()
     }
 
+    async getAll() {
+        return await this.db.cats.toArray()
+    }
+
     async update(cat) {
         return await this.db.cats.put(cat);
     }

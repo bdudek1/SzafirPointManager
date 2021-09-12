@@ -10,6 +10,10 @@ class DexieLittersRepository extends LittersRepository {
 
     }
 
+    getAll() {
+        
+    }
+
     update() {
 
     }

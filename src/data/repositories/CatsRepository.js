@@ -8,6 +8,10 @@ class CatsRepository {
 
     }
 
+    getAll() {
+        
+    }
+
     update() {
 
     }

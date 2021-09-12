@@ -1,9 +1,13 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 
 import SearchContext from '../../SearchContext'
 
 const OffersPage = () => {
     const [searchString, setSearchString] = useContext(SearchContext)
+
+    useEffect(() => {
+        setSearchString('')
+    }, [])
 
     return (
         <React.Fragment>

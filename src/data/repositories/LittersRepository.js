@@ -8,6 +8,10 @@ class LittersRepository {
 
     }
 
+    getAll() {
+        
+    }
+
     update() {
 
     }

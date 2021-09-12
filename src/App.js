@@ -12,7 +12,7 @@ import Layout from './containers/Layout/Layout';
 import SearchContext from './SearchContext';
 
 function App() {
-  const [searchString, setSearchString] = useState('SearchString');
+  const [searchString, setSearchString] = useState('');
 
   return (
     <SearchContext.Provider value ={[searchString, setSearchString]}>
