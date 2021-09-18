@@ -9,9 +9,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
@@ -32,14 +30,6 @@ const AddCatForm = (props) => {
   const [photo, setPhoto] = useState(null)
 
   const [snackbarOpen, setSnackbarOpen] = useState(false)
-
-  useEffect(() => {
-    console.log(name)
-    console.log(sex)
-    console.log(color)
-    console.log(availability)
-    console.log(photo)
-  }, [name, sex, color, availability, photo])
 
   const handleAddCat = async () => {
     const cat = new CatDTOBuilder().setName(name)
@@ -131,7 +121,7 @@ const AddCatForm = (props) => {
         </DialogActions>
       </Dialog>
 
-      <Snackbar open={snackbarOpen} autoHideDuration={4000} onClose={handleSnackbarClose}>
+      <Snackbar open={snackbarOpen} autoHideDuration={2500} onClose={handleSnackbarClose}>
         <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
           Dodano {name}.
         </Alert>

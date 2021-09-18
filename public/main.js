@@ -6,7 +6,7 @@ const isDev = require('electron-is-dev');
 function createWindow () {
     const win = new BrowserWindow({
       width: 1000,
-      height: 600,
+      height: 700,
       title: 'SzafirPoint Menedżer',
       webPreferences: {
         nodeIntegration: true,

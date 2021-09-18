@@ -1,4 +1,5 @@
 import LitterDTO from "./LitterDTO";
+import IndexedLitterDTO from "./IndexedLitterDTO";
 
 class LitterDTOBuilder {
     private name :string = '';
@@ -9,49 +10,59 @@ class LitterDTOBuilder {
     private kittens :Array<object> = new Array();
     private photo :Blob = new Blob();
     private galleryLink :string = '';
+    private id :number = 0;
 
-    setName (name :string) {
+    public setName (name :string) {
         this.name = name;
         return this;
     }
 
-    setBirthDate (birthDate :Date) {
+    public setBirthDate (birthDate :Date) {
         this.birthDate = birthDate;
         return this;
     }
 
-    setRace (race :string) {
+    public setRace (race :string) {
         this.race = race;
         return this;
     }
 
-    setMother (mother :string) {
+    public setMother (mother :string) {
         this.mother = mother;
         return this;
     }
 
-    setFather (father :string) {
+    public setFather (father :string) {
         this.father = father;
         return this;
     }
 
-    setKittens (kittens :Array<object>) {
+    public setKittens (kittens :Array<object>) {
         this.kittens = kittens;
         return this;
     }
 
-    setPhoto (photo :Blob) {
+    public setPhoto (photo :Blob) {
         this.photo = photo;
         return this;
     }
 
-    setGalleryLink (galleryLink :string) {
+    public setGalleryLink (galleryLink :string) {
         this.galleryLink = galleryLink;
         return this;
     }
 
-    build () {
-        return new LitterDTO(this.name, this.birthDate, this.race, this.mother, this.father, this.kittens, this.photo, this.galleryLink);
+    public setId(id :number) {
+        this.id = id
+        return this;
+    }
+
+    public build () {
+        if(this.id === 0) {
+            return new LitterDTO(this.name, this.birthDate, this.race, this.mother, this.father, this.kittens, this.photo, this.galleryLink);
+        } else {
+            return new IndexedLitterDTO(this.name, this.birthDate, this.race, this.mother, this.father, this.kittens, this.photo, this.galleryLink, this.id);
+        }
     }
 
 };

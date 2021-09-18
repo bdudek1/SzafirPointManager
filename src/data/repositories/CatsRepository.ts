@@ -8,7 +8,7 @@ interface CatsRepository {
 
     update(cat: object) :Promise<any>
 
-    deleteByName(name: string) :Promise<any>
+    delete(id: number) :Promise<any>
 
 }
 

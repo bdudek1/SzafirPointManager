@@ -4,13 +4,11 @@ interface CatService {
 
     saveCat(cat: object) :Promise<any>
 
-    deleteCat(name :string) :Promise<any>
+    deleteCat(id :number) :Promise<any>
 
     updateCat(cat :object) :Promise<any>
 
     getAllCats() :Promise<Array<any>>
-
-    getCatsBySearchQuery(query :string) :Promise<Array<any>>
     
 }
 

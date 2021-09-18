@@ -21,14 +21,11 @@ class DexieLittersRepository implements LittersRepository {
     }
 
     async update(litter :object) {
-        return await this.db.litters.put(litter);
+        return await this.db.litters.update(litter);
     }
 
-    async deleteByName(name :string) {
-        await this.db.transaction('rw', this.db.litters, async () => {
-            const id = await this.getIdByName(name)
-            await this.db.litters.delete(id)
-        });
+    async delete(id :number) {
+        return await this.db.litters.delete(id)
     }
 
     private async getIdByName(name :string) {

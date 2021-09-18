@@ -18,8 +18,8 @@ class LitterServiceImpl implements LitterService {
         return await this.litterRepo.save(litter)
     }
 
-    async deleteLitter(name :string) {
-        return await this.litterRepo.deleteByName(name)
+    async deleteLitter(id :number) {
+        return await this.litterRepo.delete(id)
     }
 
     async updateLitter(litter :object) {
@@ -28,18 +28,6 @@ class LitterServiceImpl implements LitterService {
 
     async getAllLitters() {
         const dbLitters = await this.litterRepo.getAll()
-
-        const litters = new Array()
-
-        dbLitters.forEach((litter :any) => {
-            litters.push(this.buildLitter(litter))
-        })
-
-        return litters;
-    }
-
-    async getLittersBySearchQuery(query :string) {
-        const dbLitters =  await this.litterRepo.getBySearchQuery(query)
 
         const litters = new Array()
 
@@ -60,6 +48,7 @@ class LitterServiceImpl implements LitterService {
                                             .setKittens(dbLitter.kittens)
                                             .setPhoto(dbLitter.photo)
                                             .setGalleryLink(dbLitter.galleryLink)
+                                            .setId(dbLitter.id)
                                             .build()
 
         return litter

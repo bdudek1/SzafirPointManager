@@ -21,15 +21,11 @@ class DexieCatsRepository implements CatsRepository {
     }
 
     async update(cat :object) {
-        return await this.db.cats.put(cat);
+        return await this.db.cats.update(cat);
     }
 
-    async deleteByName(name :string) {
-        console.log(name)
-        await this.db.transaction('rw', this.db.cats, async () => {
-            const id = await this.getIdByName(name)
-            await this.db.cats.delete(id)
-        });
+    async delete(id :number) {
+        return await this.db.cats.delete(id)
     }
 
     private async getIdByName(name :string) {

@@ -72,7 +72,7 @@ const NavBar = ({setIsDrawerOpen}) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="fixed" style={{marginBottom: '70px'}}>
         <Toolbar className="appBar">
         <div className={classes.search}>
             <div className={classes.searchIcon}>

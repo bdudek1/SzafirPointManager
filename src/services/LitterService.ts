@@ -4,13 +4,11 @@ interface LitterService {
 
     saveLitter(litter: object) :Promise<any>
 
-    deleteLitter(name :string) :Promise<any>
+    deleteLitter(id :number) :Promise<any>
 
     updateLitter(litter :object) :Promise<any>
 
     getAllLitters() :Promise<Array<any>>
-
-    getLittersBySearchQuery(query :string) :Promise<Array<any>>
     
 }
 

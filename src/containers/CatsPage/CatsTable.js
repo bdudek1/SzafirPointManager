@@ -30,13 +30,15 @@ const createData = (cat) => {
     const color = cat.getColor()
     const availability = cat.getAvailability()
     const photo = cat.getPhoto()
+    const id = cat.getId()
 
   return {
     name,
     sex,
     color,
     availability,
-    photo
+    photo,
+    id
   };
 }
 
@@ -164,6 +166,7 @@ const CatsTable = ({searchString}) => {
   const [clickedPhoto, setClickedPhoto] = React.useState(null)
   const [catImageOpen, setCatImageOpen] = React.useState(false)
 
+  const [clickedCatId, setClickedCatId] = React.useState(null)
   const [clickedCatName, setClickedCatName] = React.useState(null)
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false)
 
@@ -190,15 +193,16 @@ const CatsTable = ({searchString}) => {
   }
 
   const getCatsBySearchQuery = (searchQuery) => {
+    const lowerCaseQuery = searchQuery.toLowerCase()
     const rowsBuf = new Array()
 
     catService.getAllCats().then(cats => {
         cats.forEach(cat => {
 
-          if(cat.getName().includes(searchQuery) || 
-            cat.getColor().includes(searchQuery) || 
-            cat.getSex().includes(searchQuery) || 
-            cat.getAvailability().includes(searchQuery)){
+          if(cat.getName().toLowerCase().includes(lowerCaseQuery) || 
+            cat.getColor().toLowerCase().includes(lowerCaseQuery) || 
+            getSex(cat.getSex()).toLowerCase().includes(lowerCaseQuery) || 
+            getAvailability(cat.getAvailability()).toLowerCase().includes(lowerCaseQuery)){
 
             rowsBuf.push(createData(cat))
           }
@@ -214,35 +218,6 @@ const CatsTable = ({searchString}) => {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-
-    setSelected(newSelected);
-  };
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -251,8 +226,6 @@ const CatsTable = ({searchString}) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const photoToImg = (photo) => {
     return <img src={URL.createObjectURL(photo)} className="preview-image" onClick ={() => handleImageClicked(photo)} />
@@ -263,7 +236,8 @@ const CatsTable = ({searchString}) => {
     setCatImageOpen(true)
   }
 
-  const handleDeleteCat = (name) => {
+  const handleDeleteCat = (id, name) => {
+    setClickedCatId(id)
     setClickedCatName(name)
     setDeleteDialogOpen(true)
   }
@@ -320,7 +294,6 @@ const CatsTable = ({searchString}) => {
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
@@ -339,7 +312,7 @@ const CatsTable = ({searchString}) => {
                       key={row.name}
                     >
                       <TableCell>
-                        <DeleteIcon className="remove-icon" onClick={() => handleDeleteCat(row.name)}/>
+                        <DeleteIcon className="remove-icon" onClick={() => handleDeleteCat(row.id, row.name)}/>
                       </TableCell>
                       <TableCell
                         component="th"
@@ -370,11 +343,13 @@ const CatsTable = ({searchString}) => {
         </TableContainer>
 
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[5, 10, 25, 100]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
+          labelDisplayedRows={(props) => `${props.from}-${props.to} z ${props.count !== -1 ? props.count : `więcej niż ${props.to}`}`}
+          labelRowsPerPage="Ilość wierszy na stronę: "
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
@@ -387,7 +362,7 @@ const CatsTable = ({searchString}) => {
 
       <DeleteCatDialog open={deleteDialogOpen}
                        setOpen={setDeleteDialogOpen}
-                       deleteCat={() => catService.deleteCat(clickedCatName)}
+                       deleteCat={() => catService.deleteCat(clickedCatId)}
                        catName={clickedCatName}
                        refreshCats={() => getCatsBySearchQuery(searchString)}
        />

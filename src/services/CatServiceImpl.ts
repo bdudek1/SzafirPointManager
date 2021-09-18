@@ -18,12 +18,12 @@ class CatServiceImpl implements CatService {
         return await this.catRepo.save(cat)
     }
 
-    async deleteCat(name :string) {
-        return await this.catRepo.deleteByName(name)
+    async deleteCat(id :number) {
+        return await this.catRepo.delete(id)
     }
 
-    async updateCat(cat :object) {
-        return await this.catRepo.upate(cat)
+    async updateCat(cat :any) {
+        return await this.catRepo.upate(cat.getId(), cat.toNonIndexed())
     }
 
     async getAllCats() {
@@ -35,17 +35,7 @@ class CatServiceImpl implements CatService {
             cats.push(this.buildCat(cat))
         })
 
-        return cats
-    }
-
-    async getCatsBySearchQuery(query :string) {
-        const dbCats =  await this.catRepo.getBySearchQuery(query)
-
-        const cats = new Array()
-
-        dbCats.forEach((cat: any) => {
-            cats.push(this.buildCat(cat))
-        })
+        console.log(cats)
 
         return cats
     }
@@ -57,6 +47,7 @@ class CatServiceImpl implements CatService {
                                        .setColor(dbCat.color)
                                        .setAvailability(dbCat.availability)
                                        .setPhoto(dbCat.photo)
+                                       .setId(dbCat.id)
                                        .build()
 
         return cat
