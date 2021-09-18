@@ -1,29 +1,28 @@
 import CatService from "./CatService";
 import CatDTOBuilder from "../data/dto/CatDTOBuilder";
 
-class CatServiceImpl extends CatService {
+class CatServiceImpl implements CatService {
     catRepo;
 
-    constructor(catRepo) {
-        super()
+    constructor(catRepo: any) {
         this.catRepo = catRepo
     }
 
-    async getCatByName(name) {
+    async getCatByName(name :string) {
         const dbCat =  await this.catRepo.getByName(name)
 
         return this.buildCat(dbCat)
     }
 
-    async saveCat(cat) {
+    async saveCat(cat :object) {
         return await this.catRepo.save(cat)
     }
 
-    async deleteCatByName(name) {
+    async deleteCat(name :string) {
         return await this.catRepo.deleteByName(name)
     }
 
-    async updateCat(cat) {
+    async updateCat(cat :object) {
         return await this.catRepo.upate(cat)
     }
 
@@ -32,26 +31,26 @@ class CatServiceImpl extends CatService {
 
         const cats = new Array()
 
-        dbCats.forEach(cat => {
+        dbCats.forEach((cat: any) => {
             cats.push(this.buildCat(cat))
         })
 
         return cats
     }
 
-    async getCatsBySearchQuery(query) {
+    async getCatsBySearchQuery(query :string) {
         const dbCats =  await this.catRepo.getBySearchQuery(query)
 
         const cats = new Array()
 
-        dbCats.forEach(cat => {
+        dbCats.forEach((cat: any) => {
             cats.push(this.buildCat(cat))
         })
 
         return cats
     }
 
-    buildCat(dbCat) {
+    private buildCat(dbCat :any) {
         const cat = new CatDTOBuilder()
                                        .setName(dbCat.name)
                                        .setSex(dbCat.sex)

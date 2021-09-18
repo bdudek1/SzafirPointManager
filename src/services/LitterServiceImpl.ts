@@ -1,28 +1,28 @@
 import LitterService from "./LitterService";
+import LitterDTOBuilder from "../data/dto/LitterDTOBuilder";
 
-class LitterServiceImpl extends LitterService {
+class LitterServiceImpl implements LitterService {
     litterRepo;
 
-    constructor(litterRepo) {
-        super()
+    constructor(litterRepo :any) {
         this.litterRepo = litterRepo
     }
 
-    async getLitterByName(name) {
+    async getLitterByName(name :string) {
         const dbLitter =  await this.litterRepo.getByName(name)
 
         return this.buildLitter(dbLitter)
     }
 
-    async saveLitter(litter) {
+    async saveLitter(litter :object) {
         return await this.litterRepo.save(litter)
     }
 
-    async deleteLitterByName(name) {
+    async deleteLitter(name :string) {
         return await this.litterRepo.deleteByName(name)
     }
 
-    async updateLitter(litter) {
+    async updateLitter(litter :object) {
         return await this.litterRepo.upate(litter)
     }
 
@@ -31,26 +31,26 @@ class LitterServiceImpl extends LitterService {
 
         const litters = new Array()
 
-        dbLitters.forEach(litter => {
+        dbLitters.forEach((litter :any) => {
             litters.push(this.buildLitter(litter))
         })
 
         return litters;
     }
 
-    async getLittersBySearchQuery(query) {
+    async getLittersBySearchQuery(query :string) {
         const dbLitters =  await this.litterRepo.getBySearchQuery(query)
 
         const litters = new Array()
 
-        dbLitters.forEach(litter => {
+        dbLitters.forEach((litter :any) => {
             litters.push(this.buildLitter(litter))
         })
 
         return litters;
     }
 
-    buildLitter(dbLitter) {
+    buildLitter(dbLitter :any) {
         const litter = new LitterDTOBuilder()
                                             .setName(dbLitter.name)
                                             .setBirthDate(dbLitter.birthDate)

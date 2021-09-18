@@ -28,7 +28,7 @@ h1 {
 }
 
 * {
-  font-family: cursive;
+  font-family: cursive !important;
 }
 
 .drawer-link {
@@ -49,7 +49,47 @@ h1 {
   transition-duration: 0.3s;
 }
 
+.button {
+  text-align: right;
+  background-color:#3c7ee8 !important;
+  color: white;
+}
+
+.button:hover {
+  background-color:#0b48a8 !important;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+.preview-image {
+  max-height: 50px;
+  border-radius: 5px;
+}
+
+.preview-image:hover {
+  cursor: pointer;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transition-duration: 0.3s;
+}
+
+.image {
+  max-height: 450px;
+}
+
+.remove-icon {
+  color: #3c7ee8;
+}
+
+.remove-icon:hover {
+  cursor: pointer;
+  color: crimson;
+  transition-duration: 0.3s;
+}
+
 .appBar {
   background-color: #3c7ee8;
+  top: 0px;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
 }
 

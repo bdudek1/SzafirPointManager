@@ -11,7 +11,8 @@ function createWindow () {
       webPreferences: {
         nodeIntegration: true,
       },
-      icon: __dirname + '/favicon.ico'
+      icon: __dirname + '/favicon.ico',
+      autoHideMenuBar: true,
     })
   
     win.loadURL(

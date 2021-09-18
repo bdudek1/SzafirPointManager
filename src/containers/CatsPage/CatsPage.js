@@ -2,44 +2,45 @@ import React, {useContext, useEffect, useState} from 'react'
 
 import SearchContext from '../../SearchContext'
 
-import CatDTOBuilder from '../../data/dto/CatDTOBuilder'
-import DexieCatsRepository from '../../data/repositories/DexieCatsRepository'
-import CatServiceImpl from '../../services/CatServiceImpl'
+import CatsTable from './CatsTable'
 
 const CatsPage = () => {
     const [searchString, setSearchString] = useContext(SearchContext)
-    const [catService] = useState(new CatServiceImpl(new DexieCatsRepository()))
+    //const [addCatFormOpen, setAddCatFormOpen] = useState(false)
+    //const [catService] = useState(new CatServiceImpl(new DexieCatsRepository()))
 
     useEffect(() => {
         setSearchString('')
         // const cat = new CatDTOBuilder()
-        //                                .setName("name")
-        //                                .setSex("sex")
-        //                                .setColor("color")
-        //                                .setAvailability("available")
+        //                                .setName("name6")
+        //                                .setSex("sex3")
+        //                                .setColor("color3")
+        //                                .setAvailability(Availability.Reserved)
         //                                .setPhoto(null)
         //                                .build()
-        // catsRepo.save(cat)
+        // catService.saveCat(cat)
 
-        //catsRepo.deleteByName("name")
+        //catService.deleteCat("name2")
 
-        catService.getAllCats().then(result => {
-            console.log(result)
-        })
+        // catService.getAllCats().then(result => {
+        //     console.log(result)
+        // })
+
+        // catService.getCatByName("name2").then(result => {
+        //     console.log(result)
+        // })
         //console.log(catsRepo.getByName("name"))
     }, [])
 
     useEffect(() => {
         console.log(searchString)
         
-        // catsRepo.getBySearchQuery(searchString).then(result => {
-        //     console.log(result)
-        // })
     }, [searchString])
     
     return (
         <React.Fragment>
             <h2>Koty</h2>
+            <CatsTable searchString={searchString}/>
         </React.Fragment>
     )
 }

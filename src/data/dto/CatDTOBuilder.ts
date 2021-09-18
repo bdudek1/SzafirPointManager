@@ -1,37 +1,33 @@
 import CatDTO from "./CatDTO";
 
 class CatDTOBuilder  {
-    name;
-    sex;
-    color;
-    availability;
-    photo;
+    private name :string = '';
+    private sex :string = '';
+    private color :string = '';
+    private availability :string = '';
+    private photo :Blob = new Blob();
 
-    constructor() {
-
-    }
-
-    setName (name) {
+    setName (name :string) {
         this.name = name;
         return this;
     }
 
-    setSex (sex) {
+    setSex (sex :string) {
         this.sex = sex;
         return this;
     }
 
-    setColor (color) {
+    setColor (color :string) {
         this.color = color;
         return this;
     }
     
-    setAvailability (availability) {
+    setAvailability (availability :string) {
         this.availability = availability;
         return this;
     }
 
-    setPhoto (photo) {
+    setPhoto (photo :Blob) {
         this.photo = photo;
         return this;
     }
